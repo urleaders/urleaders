@@ -15,7 +15,6 @@ end
 
 # development gems
 group :development, :test do
-  gem 'sqlite3', '~> 1.3.8'    # dev & test database
   gem 'figaro', '~> 0.7.0'     # env variables
 end
 
@@ -34,6 +33,7 @@ group :production do
   gem 'rails_12factor'
 end
 
+gem 'mysql2'
 
 # Devise
 gem 'devise', '~> 3.2.2'
@@ -45,3 +45,8 @@ group :development, :test do
 end
 
 gem 'bootstrap-sass', '~> 3.0.3.0'
+
+
+# For admin interfaces
+gem 'activeadmin', github: 'gregbell/active_admin'
+

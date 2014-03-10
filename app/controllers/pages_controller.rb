@@ -9,4 +9,11 @@ class PagesController < ApplicationController
   def inside
   end 
     
+  def maps 
+  end 
+
+  def pc
+    @all_pc = ElectoralArea.pc_details()
+  end
+
 end
