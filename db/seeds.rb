@@ -3,16 +3,6 @@
 
 # Temporary admin account
 
-u = User.new(
-    username: "admin",
-    email: "admin@urleaders.com",
-    password: "url1024",
-    password_confirmation: "url1024",
-    admin: true
-)
-u.skip_confirmation!
-u.save!
-
 GEOMETRY_TYPE_NAME_MAP = {
     "Point" => 0,
     "LineString" => 1,
@@ -49,3 +39,14 @@ for pc in json_list
   pc_obj.save!
 
 end 
+
+
+u = User.new(
+    username: "admin",
+    email: "admin@urleaders.com",
+    password: "url1024",
+    password_confirmation: "url1024",
+    admin: true
+)
+u.skip_confirmation!
+u.save!
