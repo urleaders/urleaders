@@ -22,7 +22,7 @@ GEOMETRY_TYPE_NAME_MAP = {
     "MultiPolygon" => 5,
 }
 
-geo_json = ActiveSupport::JSON.decode(File.read('/home/neeraj/workspace/urleaders/db/india_pc_1.json'))
+geo_json = ActiveSupport::JSON.decode(File.read('db/india_pc_1.json'))
 
 json_list = geo_json['features']
 
