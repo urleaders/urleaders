@@ -14,6 +14,7 @@ class PagesController < ApplicationController
 
   def pc
     @all_pc = ElectoralArea.pc_details()
+    
   end
 
 end
