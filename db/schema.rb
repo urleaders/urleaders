@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140309041445) do
+ActiveRecord::Schema.define(version: 20140315210907) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -46,6 +46,48 @@ ActiveRecord::Schema.define(version: 20140309041445) do
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
+  create_table "candidates", force: true do |t|
+    t.string   "name"
+    t.integer  "party_id"
+    t.string   "party_join_date"
+    t.string   "datetime"
+    t.text     "past_parties"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "candidates", ["party_id"], name: "index_candidates_on_party_id", using: :btree
+
+  create_table "election_candidates", force: true do |t|
+    t.integer  "election_id"
+    t.integer  "candidate_id"
+    t.integer  "party_id"
+    t.boolean  "deleted"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "election_candidates", ["candidate_id"], name: "index_election_candidates_on_candidate_id", using: :btree
+  add_index "election_candidates", ["election_id"], name: "index_election_candidates_on_election_id", using: :btree
+  add_index "election_candidates", ["party_id"], name: "index_election_candidates_on_party_id", using: :btree
+
+  create_table "elections", force: true do |t|
+    t.integer  "ElectoralArea_id"
+    t.date     "election_date"
+    t.integer  "type"
+    t.string   "label"
+    t.integer  "candidate_id"
+    t.integer  "party_id"
+    t.date     "result_date"
+    t.boolean  "deleted"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "elections", ["ElectoralArea_id"], name: "index_elections_on_ElectoralArea_id", using: :btree
+  add_index "elections", ["candidate_id"], name: "index_elections_on_candidate_id", using: :btree
+  add_index "elections", ["party_id"], name: "index_elections_on_party_id", using: :btree
+
   create_table "electoral_areas", force: true do |t|
     t.integer  "geometry_id"
     t.string   "name"
@@ -73,6 +115,13 @@ ActiveRecord::Schema.define(version: 20140309041445) do
   create_table "geometries", force: true do |t|
     t.integer  "geo_type"
     t.binary   "coordinates", limit: 16777215
+    t.boolean  "deleted"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "parties", force: true do |t|
+    t.string   "name"
     t.boolean  "deleted"
     t.datetime "created_at"
     t.datetime "updated_at"
