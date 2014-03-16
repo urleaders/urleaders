@@ -37,6 +37,8 @@ geo_type = GeoType.new
 geo_type.name = "MultiPolygon"
 geo_type.save!
 
+
+
 electoral_area_type = ElectoralAreaType.new
 electoral_area_type.name = "Parliamentary Constituency"
 electoral_area_type.save!
@@ -44,6 +46,8 @@ electoral_area_type.save!
 electoral_area_type = ElectoralAreaType.new
 electoral_area_type.name = "Assembly Constituency"
 electoral_area_type.save!
+
+
 
 state_type = StateType.new
 state_type.name = "State"
