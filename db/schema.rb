@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140316074947) do
+ActiveRecord::Schema.define(version: 20140316095928) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -93,11 +93,13 @@ ActiveRecord::Schema.define(version: 20140316074947) do
     t.boolean  "deleted",              default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "State_id",                             null: false
   end
 
   add_index "electoral_areas", ["ElectoralAreaType_id"], name: "index_electoral_areas_on_ElectoralAreaType_id", using: :btree
   add_index "electoral_areas", ["ElectoralArea_id"], name: "index_electoral_areas_on_ElectoralArea_id", using: :btree
   add_index "electoral_areas", ["Geometry_id"], name: "index_electoral_areas_on_Geometry_id", using: :btree
+  add_index "electoral_areas", ["State_id"], name: "index_electoral_areas_on_State_id", using: :btree
 
   create_table "friendly_id_slugs", force: true do |t|
     t.string   "slug",                      null: false
