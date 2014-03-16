@@ -3,6 +3,15 @@
 
 # Temporary admin account
 
+u = User.new(
+    username: "admin",
+    email: "admin@urleaders.com",
+    password: "url1024",
+    password_confirmation: "url1024",
+    admin: true
+)
+u.skip_confirmation!
+u.save!
 
 geo_type = GeoType.new
 geo_type.name = "Point"
@@ -59,14 +68,4 @@ party_type.save!
 party_type = PartyType.new
 party_type.name = "Independent"
 party_type.save!
-
-u = User.new(
-    username: "admin",
-    email: "admin@urleaders.com",
-    password: "url1024",
-    password_confirmation: "url1024",
-    admin: true
-)
-u.skip_confirmation!
-u.save!
 
