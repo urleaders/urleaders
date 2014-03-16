@@ -1,5 +1,6 @@
 ActiveAdmin.register Geometry do
 
+  permit_params :GeoType_id, :deleted
   
   # See permitted parameters documentation:
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters

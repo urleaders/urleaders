@@ -1,6 +1,5 @@
-ActiveAdmin.register Election do
+ActiveAdmin.register PartyType do
 
-  permit_params :name, :ElectoralArea_id, :ElectionType_id, :Candidate_id, :Party_id, :label, :date_vote, :date_result, :deleted
   
   # See permitted parameters documentation:
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
