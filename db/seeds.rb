@@ -65,11 +65,3 @@ election_type = ElectionType.new
 election_type.name = "By Election"
 election_type.save!
 
-party_type = PartyType.new
-party_type.name = "Party"
-party_type.save!
-
-party_type = PartyType.new
-party_type.name = "Independent"
-party_type.save!
-

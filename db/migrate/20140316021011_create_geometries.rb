@@ -3,7 +3,7 @@ class CreateGeometries < ActiveRecord::Migration
     create_table :geometries do |t|
       t.references :GeoType, null: false, index: true
       t.binary :coordinates, :limit => 1.megabyte, null: false
-      t.boolean :deleted, :default => false
+      t.boolean :deleted, null: false, :default => false
 
       t.timestamps
     end

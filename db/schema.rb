@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140316095928) do
+ActiveRecord::Schema.define(version: 20140316021100) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -30,10 +30,10 @@ ActiveRecord::Schema.define(version: 20140316095928) do
 
   create_table "candidates", force: true do |t|
     t.string   "name",                            null: false
-    t.integer  "Party_id"
-    t.date     "date_party_join"
-    t.text     "parties_past"
-    t.boolean  "deleted",         default: false
+    t.integer  "Party_id",        default: 0,     null: false
+    t.date     "date_party_join",                 null: false
+    t.text     "parties_past",                    null: false
+    t.boolean  "deleted",         default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -43,8 +43,8 @@ ActiveRecord::Schema.define(version: 20140316095928) do
   create_table "election_candidates", force: true do |t|
     t.integer  "Election_id",                  null: false
     t.integer  "Candidate_id",                 null: false
-    t.integer  "Party_id",                     null: false
-    t.boolean  "deleted",      default: false
+    t.integer  "Party_id",     default: 0,     null: false
+    t.boolean  "deleted",      default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 20140316095928) do
 
   create_table "election_types", force: true do |t|
     t.string   "name",                       null: false
-    t.boolean  "deleted",    default: false
+    t.boolean  "deleted",    default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -64,11 +64,11 @@ ActiveRecord::Schema.define(version: 20140316095928) do
     t.integer  "ElectoralArea_id",                 null: false
     t.integer  "ElectionType_id",                  null: false
     t.integer  "Candidate_id",                     null: false
-    t.integer  "Party_id"
-    t.string   "label"
+    t.integer  "Party_id",                         null: false
+    t.string   "label",                            null: false
     t.date     "date_vote",                        null: false
     t.date     "date_result",                      null: false
-    t.boolean  "deleted",          default: false
+    t.boolean  "deleted",          default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -80,20 +80,20 @@ ActiveRecord::Schema.define(version: 20140316095928) do
 
   create_table "electoral_area_types", force: true do |t|
     t.string   "name",                       null: false
-    t.boolean  "deleted",    default: false
+    t.boolean  "deleted",    default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "electoral_areas", force: true do |t|
-    t.string   "name"
-    t.integer  "Geometry_id"
+    t.string   "name",                                 null: false
+    t.integer  "State_id",                             null: false
+    t.integer  "Geometry_id",          default: 0,     null: false
     t.integer  "ElectoralAreaType_id",                 null: false
-    t.integer  "ElectoralArea_id",     default: 0
-    t.boolean  "deleted",              default: false
+    t.integer  "ElectoralArea_id",     default: 0,     null: false
+    t.boolean  "deleted",              default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "State_id",                             null: false
   end
 
   add_index "electoral_areas", ["ElectoralAreaType_id"], name: "index_electoral_areas_on_ElectoralAreaType_id", using: :btree
@@ -116,7 +116,7 @@ ActiveRecord::Schema.define(version: 20140316095928) do
 
   create_table "geo_types", force: true do |t|
     t.string   "name",                       null: false
-    t.boolean  "deleted",    default: false
+    t.boolean  "deleted",    default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -124,7 +124,7 @@ ActiveRecord::Schema.define(version: 20140316095928) do
   create_table "geometries", force: true do |t|
     t.integer  "GeoType_id",                                   null: false
     t.binary   "coordinates", limit: 16777215,                 null: false
-    t.boolean  "deleted",                      default: false
+    t.boolean  "deleted",                      default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -132,43 +132,33 @@ ActiveRecord::Schema.define(version: 20140316095928) do
   add_index "geometries", ["GeoType_id"], name: "index_geometries_on_GeoType_id", using: :btree
 
   create_table "parties", force: true do |t|
-    t.string   "name",                         null: false
-    t.integer  "PartyType_id",                 null: false
-    t.string   "symbol_name"
-    t.text     "description"
-    t.boolean  "deleted",      default: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "parties", ["PartyType_id"], name: "index_parties_on_PartyType_id", using: :btree
-
-  create_table "party_types", force: true do |t|
-    t.string   "name",                       null: false
-    t.boolean  "deleted",    default: false
+    t.string   "name",                        null: false
+    t.string   "symbol_name",                 null: false
+    t.text     "description",                 null: false
+    t.boolean  "deleted",     default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "state_types", force: true do |t|
     t.string   "name",                       null: false
-    t.boolean  "deleted",    default: false
+    t.boolean  "deleted",    default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "states", force: true do |t|
     t.string   "name",                           null: false
-    t.integer  "Geometry_id"
+    t.integer  "Geometry_id",    default: 0,     null: false
     t.integer  "StateType_id",                   null: false
-    t.integer  "Candidate_id"
-    t.integer  "Party_id"
-    t.string   "capital"
+    t.integer  "Candidate_id",   default: 0,     null: false
+    t.integer  "Party_id",       default: 0,     null: false
+    t.string   "capital",        default: "0",   null: false
     t.date     "formation_date"
     t.text     "formation_text"
-    t.integer  "count_pc",       default: 0
-    t.integer  "count_ac",       default: 0
-    t.boolean  "deleted",        default: false
+    t.integer  "count_pc",       default: 0,     null: false
+    t.integer  "count_ac",       default: 0,     null: false
+    t.boolean  "deleted",        default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

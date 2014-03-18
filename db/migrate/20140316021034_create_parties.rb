@@ -2,10 +2,9 @@ class CreateParties < ActiveRecord::Migration
   def change
     create_table :parties do |t|
       t.string :name, null: false, index: true
-      t.references :PartyType, null: false, index: true
-      t.string :symbol_name
-      t.text :description
-      t.boolean :deleted, :default => false
+      t.string :symbol_name, null: false
+      t.text :description, null: false
+      t.boolean :deleted, null: false, :default => false
 
       t.timestamps
     end
