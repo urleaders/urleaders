@@ -3,11 +3,11 @@ task :pcg => :environment do
 
   GEOMETRY_TYPE_NAME_MAP = {
     "Point" => 1,
-    "LineString" => 2,
-    "Polygon" => 3,
-    "MultiPoint" => 4,
-    "MultiLineString" => 5,
-    "MultiPolygon" => 6,
+    "LineString" => 11,
+    "Polygon" => 21
+    "MultiPoint" => 31,
+    "MultiLineString" => 41,
+    "MultiPolygon" => 51,
   }
 
   geo_json = ActiveSupport::JSON.decode(File.read('db/india_pc_1.json'))
