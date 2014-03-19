@@ -1,6 +1,6 @@
 ActiveAdmin.register Candidate do
   
-  permit_params :Election_id, :Candidate_id, :Party_id, :deleted
+  permit_params :name, :Party_id, :date_party_join, :parties_past, :deleted
   
   # See permitted parameters documentation:
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
