@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140316021100) do
+ActiveRecord::Schema.define(version: 20140319100714) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20140316021100) do
   create_table "candidates", force: true do |t|
     t.string   "name",                            null: false
     t.integer  "Party_id",        default: 0,     null: false
-    t.date     "date_party_join",                 null: false
+    t.date     "date_party_join"
     t.text     "parties_past",                    null: false
     t.boolean  "deleted",         default: false, null: false
     t.datetime "created_at"
