@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140319100714) do
+ActiveRecord::Schema.define(version: 20140319150314) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -63,8 +63,8 @@ ActiveRecord::Schema.define(version: 20140319100714) do
   create_table "elections", force: true do |t|
     t.integer  "ElectoralArea_id",                 null: false
     t.integer  "ElectionType_id",                  null: false
-    t.integer  "Candidate_id",                     null: false
-    t.integer  "Party_id",                         null: false
+    t.integer  "Candidate_id",     default: 0
+    t.integer  "Party_id",         default: 0
     t.string   "label",                            null: false
     t.date     "date_vote",                        null: false
     t.date     "date_result",                      null: false
