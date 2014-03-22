@@ -50,3 +50,5 @@ gem 'bootstrap-sass', '~> 3.0.3.0'
 # For admin interfaces
 gem 'activeadmin', github: 'gregbell/active_admin'
 
+# app monitoring 
+gem 'newrelic_rpm'
