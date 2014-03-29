@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140319150314) do
+ActiveRecord::Schema.define(version: 20140308204052) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -28,79 +28,6 @@ ActiveRecord::Schema.define(version: 20140319150314) do
   add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
   add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
 
-  create_table "candidates", force: true do |t|
-    t.string   "name",                            null: false
-    t.integer  "Party_id",        default: 0,     null: false
-    t.date     "date_party_join"
-    t.text     "parties_past",                    null: false
-    t.boolean  "deleted",         default: false, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "candidates", ["Party_id"], name: "index_candidates_on_Party_id", using: :btree
-
-  create_table "election_candidates", force: true do |t|
-    t.integer  "Election_id",                  null: false
-    t.integer  "Candidate_id",                 null: false
-    t.integer  "Party_id",     default: 0,     null: false
-    t.boolean  "deleted",      default: false, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "election_candidates", ["Candidate_id"], name: "index_election_candidates_on_Candidate_id", using: :btree
-  add_index "election_candidates", ["Election_id"], name: "index_election_candidates_on_Election_id", using: :btree
-  add_index "election_candidates", ["Party_id"], name: "index_election_candidates_on_Party_id", using: :btree
-
-  create_table "election_types", force: true do |t|
-    t.string   "name",                       null: false
-    t.boolean  "deleted",    default: false, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "elections", force: true do |t|
-    t.integer  "ElectoralArea_id",                 null: false
-    t.integer  "ElectionType_id",                  null: false
-    t.integer  "Candidate_id",     default: 0
-    t.integer  "Party_id",         default: 0
-    t.string   "label",                            null: false
-    t.date     "date_vote",                        null: false
-    t.date     "date_result",                      null: false
-    t.boolean  "deleted",          default: false, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "elections", ["Candidate_id"], name: "index_elections_on_Candidate_id", using: :btree
-  add_index "elections", ["ElectionType_id"], name: "index_elections_on_ElectionType_id", using: :btree
-  add_index "elections", ["ElectoralArea_id"], name: "index_elections_on_ElectoralArea_id", using: :btree
-  add_index "elections", ["Party_id"], name: "index_elections_on_Party_id", using: :btree
-
-  create_table "electoral_area_types", force: true do |t|
-    t.string   "name",                       null: false
-    t.boolean  "deleted",    default: false, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "electoral_areas", force: true do |t|
-    t.string   "name",                                 null: false
-    t.integer  "State_id",                             null: false
-    t.integer  "Geometry_id",          default: 0,     null: false
-    t.integer  "ElectoralAreaType_id",                 null: false
-    t.integer  "ElectoralArea_id",     default: 0,     null: false
-    t.boolean  "deleted",              default: false, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "electoral_areas", ["ElectoralAreaType_id"], name: "index_electoral_areas_on_ElectoralAreaType_id", using: :btree
-  add_index "electoral_areas", ["ElectoralArea_id"], name: "index_electoral_areas_on_ElectoralArea_id", using: :btree
-  add_index "electoral_areas", ["Geometry_id"], name: "index_electoral_areas_on_Geometry_id", using: :btree
-  add_index "electoral_areas", ["State_id"], name: "index_electoral_areas_on_State_id", using: :btree
-
   create_table "friendly_id_slugs", force: true do |t|
     t.string   "slug",                      null: false
     t.integer  "sluggable_id",              null: false
@@ -113,60 +40,6 @@ ActiveRecord::Schema.define(version: 20140319150314) do
   add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
-
-  create_table "geo_types", force: true do |t|
-    t.string   "name",                       null: false
-    t.boolean  "deleted",    default: false, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "geometries", force: true do |t|
-    t.integer  "GeoType_id",                                   null: false
-    t.binary   "coordinates", limit: 16777215,                 null: false
-    t.boolean  "deleted",                      default: false, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "geometries", ["GeoType_id"], name: "index_geometries_on_GeoType_id", using: :btree
-
-  create_table "parties", force: true do |t|
-    t.string   "name",                        null: false
-    t.string   "symbol_name",                 null: false
-    t.text     "description",                 null: false
-    t.boolean  "deleted",     default: false, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "state_types", force: true do |t|
-    t.string   "name",                       null: false
-    t.boolean  "deleted",    default: false, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "states", force: true do |t|
-    t.string   "name",                           null: false
-    t.integer  "Geometry_id",    default: 0,     null: false
-    t.integer  "StateType_id",                   null: false
-    t.integer  "Candidate_id",   default: 0,     null: false
-    t.integer  "Party_id",       default: 0,     null: false
-    t.string   "capital",        default: "0",   null: false
-    t.date     "formation_date"
-    t.text     "formation_text"
-    t.integer  "count_pc",       default: 0,     null: false
-    t.integer  "count_ac",       default: 0,     null: false
-    t.boolean  "deleted",        default: false, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "states", ["Candidate_id"], name: "index_states_on_Candidate_id", using: :btree
-  add_index "states", ["Geometry_id"], name: "index_states_on_Geometry_id", using: :btree
-  add_index "states", ["Party_id"], name: "index_states_on_Party_id", using: :btree
-  add_index "states", ["StateType_id"], name: "index_states_on_StateType_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "username",               default: "",    null: false
